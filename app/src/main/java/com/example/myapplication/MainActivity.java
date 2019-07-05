@@ -15,6 +15,7 @@ import android.media.browse.MediaBrowser;
 import android.media.session.MediaSession;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.service.media.MediaBrowserService;
 import android.util.Log;
@@ -28,14 +29,28 @@ public class MainActivity extends AppCompatActivity {
     Handler delay = new Handler();
 
     @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
+    public boolean dispatchKeyEvent(final KeyEvent event) {
 
 
 
-        if(event.getFlags() == KeyEvent.KEYCODE_F6){
+        if(event.getAction() == KeyEvent.ACTION_DOWN){
+            final int[] verifica = {0};
+             new CountDownTimer(5000, 10000) {
+                @Override
+                public void onTick(long l) {
+                    verifica[0] = event.getAction() + verifica[0];
+                    if(verifica[0]>0){
+                       cancel();
+                        }
+                }
+
+                @Override
+                public void onFinish() {
+                    onToast(verifica[0]);
+                }
+            }.start();
 
 
-            Toast.makeText(this,"LONG",Toast.LENGTH_LONG).show();
 
         }
 
@@ -64,6 +79,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    public void onToast(int verifica){
+        if(verifica ==0){
+            Toast.makeText(this,"Basculando",Toast.LENGTH_LONG);
+        }
+
+    }
 
 
 
