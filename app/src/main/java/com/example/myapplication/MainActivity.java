@@ -25,38 +25,31 @@ import android.widget.Toast;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
+     int verifica = 0;
     Handler delay = new Handler();
 
     @Override
     public boolean dispatchKeyEvent(final KeyEvent event) {
-
-
-
         if(event.getAction() == KeyEvent.ACTION_DOWN){
-            final int[] verifica = {0};
+
              new CountDownTimer(5000, 10000) {
                 @Override
                 public void onTick(long l) {
-                    verifica[0] = event.getAction() + verifica[0];
-                    if(verifica[0]>0){
+                    verifica = event.getAction() + verifica;
+                    if(verifica >0){
                        cancel();
-                        }
+                    }
                 }
 
                 @Override
                 public void onFinish() {
-                    onToast(verifica[0]);
+                    onToast(verifica);
                 }
             }.start();
-
-
-
-        }
+ }
 
         return super.dispatchKeyEvent(event);
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
