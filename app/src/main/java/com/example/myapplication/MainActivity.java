@@ -25,8 +25,8 @@ import android.widget.Toast;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-     int verifica = 0;
-    Handler delay = new Handler();
+    private int verifica = 0;
+
 
     @Override
     public boolean dispatchKeyEvent(final KeyEvent event) {
